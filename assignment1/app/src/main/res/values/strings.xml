@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name1">Dashboard</string>
+    <string name="app_name2">My Dashiboard</string>
+    <string name="app_name3">My imformation</string>
+    <string name="app_name4">Teacher</string>
+    <string name="app_name5">Class</string>
+    <string name="app_name7">Poster</string>
+    <string name="app_name6">News</string>
+</resources>

@@ -1,0 +1,62 @@
+package com.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.service.Service;
+
+public class RegLet extends HttpServlet {
+
+    private static final long serialVersionUID = 369840050351775312L;
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // 接收客户端信息
+        String username = request.getParameter("username");
+        username = new String(username.getBytes("ISO-8859-1"), "UTF-8");
+        String password = request.getParameter("password");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println(username + "---" + password);
+
+        // 新建服务对象
+        Service serv = new Service();
+        
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // 验证处理
+        boolean reged = serv.register(username, password);
+        if (reged) {
+        	  System.out.println("register Success");
+              
+              request.getSession().setAttribute("username", username);
+              out.print("用户名：" + username);
+              out.print("密码：" + password);
+              out.flush();
+              out.close();
+              // response.sendRedirect("welcome.jsp");
+          } else {
+              System.out.println("register Failed");
+              out.print("failed");
+             
+              out.flush();
+              out.close();
+             
+          }
+        
+    }
+
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
+
+}
